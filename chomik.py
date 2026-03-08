@@ -7,6 +7,8 @@
 """
 Opis algortymu:
 
+O(nlog(n))
+
 Uzywamy binary searcha po wyniku do szukania mozliwych odleglosci pomiedzy chomikami 
 szuakmy od 1 (zakladam ze chomiki nie sa na sobie) do bn-a1 
 (nie moga byc dalej od siebie niz wynosi ta odlegosc), funkcja pomocicza check
