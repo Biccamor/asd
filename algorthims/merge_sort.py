@@ -1,47 +1,57 @@
-def mergeSort(array:list[int]) -> list[int]:
+def merge(A: list ,B: list, p: int, q: int, r: int):
+    
+    """
+    tablica A: tablica ktora chcemy posortowac
+    tablica B: buffor/tablica pomocnicza
+    p - start pierwszej czesci
+    q -  start drugiej czesci
+    r - koniec calej tablicy
+    """
 
-    if len(array) <= 1: return array
-    mid = len(array)//2
+    i = p # wskaznik na akt miejsce w 1 czesci
+    j = q # wskaznik na akt miejsce w 2 czesci
+    k = p # aktualne miejsce w naprawianej temp (B) tablicy
 
-    left_arr = array[:mid]
-    right_arr = array[mid:]
+    while i < q and j <r:
 
-    mergeSort(left_arr)
-    mergeSort(right_arr)
-    array = merge(left_arr, right_arr, array)
-
-def merge(left_arr: list[int], right_arr: list[int], array: list[int]) -> list[int]:
-
-    l, r, i = 0, 0,0
-    r_max = len(right_arr)
-    l_max = len(left_arr)
-
-    while l<l_max and r<r_max:
-
-        if left_arr[l] < right_arr[r]:
-            array[i] = left_arr[l]
-            l+=1 
+        if A[i] <= A[j]:
+            B[k] = A[i]
             i+=1
-
         else:
-            array[i] = right_arr[r]
-            r+=1
-            i+=1
-
-    while l<l_max:
-        array[i] = left_arr[l]
-        l+=1
-        i+=1
+            B[k] = A[j]
+            j+=1
+        k+=1
     
-    while r<r_max:
-        array[i] = right_arr[r]
-        r+=1
+    # jezeli zostana z 1 czesci
+    while i<q:
+        B[k] = A[i]
         i+=1
+        k+=1
+
+    # jezeli zostana z 2 czesci
+    while j<r:
+        B[k] = A[j]
+        j+=1
+        k+=1
+
+    for t in range(p,r): # od poczatku tablicy do konca
+        A[t] = B[t] # naprawiamy prawdziwa tablice
+
+def merge_sort(A: list, B: list, p: int, r: int):
     
-    return array
+    if r-p <=1: return # jezeli miedzy startem a koncem jest tylko 1 element lub 0 to zwracamy odrazu
 
+    q = (r+p)//2 # ustawiamy srodek
+    merge_sort(A,B,p,q)
+    merge_sort(A,B,q,r)
+    merge(A,B,p,q,r)
 
-if __name__=="__main__":
-    arr = [10,2,4,43,5,2,17,234]
-    mergeSort(arr)
-    print(arr)
+def main(A):
+    n = len(A)
+    B = [0]*n
+    merge_sort(A,B,0,n)
+
+if __name__ == "__main__":
+    A = [0,4,53,3,9,18,17,3,1]
+    main(A)
+    print(A)
