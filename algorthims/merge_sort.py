@@ -11,6 +11,7 @@ def merge(A: list ,B: list, p: int, q: int, r: int):
     i = p # wskaznik na akt miejsce w 1 czesci
     j = q # wskaznik na akt miejsce w 2 czesci
     k = p # aktualne miejsce w naprawianej temp (B) tablicy
+    inv_count = 0
 
     while i < q and j <r:
 
