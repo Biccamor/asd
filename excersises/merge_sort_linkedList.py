@@ -1,0 +1,2 @@
+def natural(p):
+    last 

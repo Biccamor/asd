@@ -1,46 +1,30 @@
-def mergeSort(array:list[int]) -> list[int]:
+def merge(A,B,intervals,idx,p,q,r):
+    i = p
+    j = q
+    k = p
 
-    if len(array) <= 1: return array
-    mid = len(array)//2
+    while i<q and j<r:
 
-    left_arr = array[:mid]
-    right_arr = array[mid:]
-
-    mergeSort(left_arr)
-    mergeSort(right_arr)
-    array = merge(left_arr, right_arr, array)
-
-def merge(left_arr: list[int], right_arr: list[int], array: list[int]) -> list[int]:
-
-    l, r, i = 0, 0,0
-    r_max = len(right_arr)
-    l_max = len(left_arr)
-
-    while l<l_max and r<r_max:
-
-        if left_arr[l] < right_arr[r]:
-            array[i] = left_arr[l]
-            l+=1 
+        if A[i][idx] < A[j][idx]:
+            B[k] = A[i]
             i+=1
-
         else:
-            array[i] = right_arr[r]
-            r+=1
-            i+=1
+            B[k] = A[j]
+            j+=1
 
-    while l<l_max:
-        array[i] = left_arr[l]
-        l+=1
-        i+=1
-    
-    while r<r_max:
-        array[i] = right_arr[r]
-        r+=1
-        i+=1
-    
-    return array
+        k+=1
 
-def solve(przedzialy: list[tuple[int,int]]) -> tuple[int,int]:
+
+def merge_count(A,B,max_interval,p,q,r):
+    ...
+
+def merge_sort(A,max_interval, p,r):
+    if r-p == 1: return 1
+    if r-p < 1: return 0
     
-    n = len(przedzialy)
-    
+    n = len(A)
+    B = [0]*n
+    q = (p+r)//2
+
+    merge_sort(A,)    
+    merge(A,B,p,r)
