@@ -2,7 +2,21 @@
 Chcemy znalezc takie A[i]-A[j] ktore w posortowanej talbicy byloby najwieksze jedna A jest nie posortwane
 i dostepne mamy O(n) czasu"""
 
+"""
+Opis algorytmu:
+O(n) -> czas linowy na wlozenie indeksow, stworzenie list i znalezenie max
+wiec 3*n operacji + c => O(n)
+znajdujemy max i min co nam pozwala znalezc ogolnie najdluzsza odleglosc zauwazamy ze mozemy pociac tablice na rowne czesci
+rowne kubelki kazdy kubelek miesci maxi-min // n liczb czyli (min, min+ (maxi-min)//n+1) itd dlatego ze jezeli mamy np 10 liczby
+i min to 10 a max to 100 to sredni krok musi wynosic 10 wiec albo wszystkie kroki = 10 albo przynajmniej jeden jest wiekszy (i przez to jeden mniejszy)
+tworzymy dwie tablice jedna trzyma maxy a druga minima w danych przedzialach wypelnialmy je przechodzac linowo
+nastepnie porownujemy max z poprzedniego pudelka z min aktualnym pudelkiem BO MUSZA BYC ONE OBOK SIEBIE szukamy takiego najdluzsego
+jezeli jakies pudelko jest puste to trzymamy poprzedni element (max prev pudelka) i porownujemy z min pierwszego pudelka ktore nie jest puste
+"""
+
+
 def solve(A):
+
     n = len(A)
     maxi = max(A)
     mini = min(A)
