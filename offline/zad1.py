@@ -2,7 +2,7 @@ import sys
 from random import randint, seed
 
 
-OIOIOI = False
+OIOIOI = True
 
 
 def merge(A,B,dom,p,q,r): 
@@ -12,7 +12,7 @@ def merge(A,B,dom,p,q,r):
 
     while i<q and j<r:
 
-        if A[i][1] <= A[j][1]:
+        if A[i][1] < A[j][1]:
             B[k] = A[i]
             i+=1
             

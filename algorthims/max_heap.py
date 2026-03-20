@@ -1,27 +1,30 @@
 def parent(i):
-    return i//2
-def left(i):
-    return (2*i)+1
-def right(i):
-    return 2*i+2
+    # Poprawiony wzór dla tablic zaczynających się od indeksu 0
+    return (i - 1) // 2
 
-def heapify(A,n,i):
+def left(i):
+    return (2 * i) + 1
+
+def right(i):
+    return (2 * i) + 2
+
+def heapify(A, n, i):
     """
-    A tablica/kopiec 
+    A - tablica/kopiec 
     n - ilosc liczb w tablicy
     i - akutalny element w kopcu ktory chcemy dac na dobre miejsce
     """
-    max_int = i
-    if left(i) <n and A[left(i)] > A[max_int]:
-        max_int = left(i)
-    if right(i) < n and A[right(i)] > A[max_int]:
-        max_int = right(i)
-    if max_int != i:
-        A[i], A[max_int] = A[max_int], A[i]
-        heapify(A,n,max_int)
+    max_idx = i
+    if left(i) < n and A[left(i)] > A[max_idx]:
+        max_idx = left(i)
+    if right(i) < n and A[right(i)] > A[max_idx]:
+        max_idx = right(i)
+    if max_idx != i:
+        A[i], A[max_idx] = A[max_idx], A[i]
+        heapify(A, n, max_idx)
 
 def build_heap(A):
     n = len(A)
-
-    for i in range(parent(n-1),-1,-1): 
-        heapify(A,n,i)
+    # Zaczynamy od ojca ostatniego elementu i idziemy do 0
+    for i in range(parent(n - 1), -1, -1): 
+        heapify(A, n, i)
