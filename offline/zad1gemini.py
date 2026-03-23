@@ -4,55 +4,53 @@ from random import randint, seed
 
 OIOIOI = True
 
-
-def merge(A,B,dom,p,q,r): 
+sys.setrecursionlimit(200000)
+def merge(A, B, dom, p, q, r): 
     i = p 
     j = q
     k = p
 
-    while i<q and j<r:
-
+    while i < q and j < r:
         if A[i][1] < A[j][1]:
             B[k] = A[i]
-            i+=1
-            
+            i += 1
         else:
-            dom[A[j][0]] += i-p
+            dom[A[j][0]] += i - p
             B[k] = A[j]
-            j+=1
-        k+=1
+            j += 1
+        k += 1
 
-    while i<q:
-        B[k]=A[i]
-        k+=1
-        i+=1
-    
-    while j<r:
-        B[k]=A[j]
-        dom[A[j][0]]+=i-p
-        k+=1
-        j+=1
+    if i < q:
+        B[k:r] = A[i:q]
+    else:
 
-    for t in range(p,r):
-        A[t] = B[t]
+        B[k:r] = A[j:r]
+        for idx in range(j, r):
+            dom[A[idx][0]] += q - p
+
+    A[p:r] = B[p:r]
 
 
-def merge_sort(A,B,dom, p,r):
-    
-    if r-p <= 1: return 
+def merge_sort(A, B, dom, p, r):
+    if r - p <= 1: 
+        return 
 
-    q = (p+r)//2
-    merge_sort(A,B,dom,p,q)
-    merge_sort(A,B,dom,q,r)
-    merge(A,B,dom,p,q,r)
+    q = (p + r) // 2
+    merge_sort(A, B, dom, p, q)
+    merge_sort(A, B, dom, q, r)
+    merge(A, B, dom, p, q, r)
+
 
 def solution(T):
-    
-    T[:] = [(i, val) for i, val in enumerate(T)]    
+    if not T: return 0
+    T[:] = [(i, val) for i, val in enumerate(T)]
+
     n = len(T)
-    B=[0]*n
-    dom=[0]*n
-    merge_sort(T,B,dom,0,n)
+    B = [0] * n
+    dom = [0] * n
+    
+    merge_sort(T, B, dom, 0, n)
+    
     return max(dom)
 
 if __name__ == "__main__":
