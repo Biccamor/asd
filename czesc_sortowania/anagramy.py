@@ -8,3 +8,4 @@
 def rozwiazanie1(A,B,k): 
     n = len(A)
     countA = [0]*k
+    
