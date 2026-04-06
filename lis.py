@@ -18,6 +18,7 @@ def check(nums, m) -> bool:
     return False 
 
 def solution(nums) -> int:
+    
     l, r = 1, len(nums)
 
     while l<=r:
