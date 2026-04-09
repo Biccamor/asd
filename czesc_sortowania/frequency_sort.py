@@ -21,7 +21,7 @@ def counting(A):
     print(C) # na ktorej pozycji dane liczby
 
     for i in range(0, len(A)):    
-        #C[B[i]] -= 1
+        #C[B[i]] -= 1x
         #ans[C[B[i]]] = A[i]
         C[B[A[i]]]-=1
         ans[C[B[A[i]]]] = A[i]
