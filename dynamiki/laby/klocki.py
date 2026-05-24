@@ -1,11 +1,13 @@
 def solve(klocki: list):
-
+    """Jeśli klocek j pasuje do wnętrza klocka i, sprawdzamy,
+      czy dołożenie go na szczyt wieży kończącej się na klocku i da nam lepszy wynik niż dotychczasowy rekord dla klocka j.
+      Funkcja max(dp[j], dp[i] + 1) gwarantuje, że pod indeksem j zawsze znajduje 
+      się długość najdłuższej znalezionej do tej pory sekwencji."""
     n = len(klocki)
     dp = [1]*n
 
     for i in range(n): 
-        for j in range(n):
-            if i == j: continue
+        for j in range(i+1, n):
             if klocki[i][0] <= klocki[j][0] and klocki[i][1] >= klocki[j][1]: 
                 dp[j] = max(dp[j], dp[i]+1)
     

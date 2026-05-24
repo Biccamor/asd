@@ -1,22 +1,25 @@
 def solve(E:list):
     n = len(E)
-    dp = [[float('inf')]*n for _ in range(n)]
-    dp[0][E[0]] = 0 
+    dp = [[float('inf')]*n for _ in range(n)] # dynamik ilosc energi x ilosc skokow
+    dp[0][E[0]] = 0  
     dp[0][0] =0 
 
     for i in range(0, n):
         for j in range(0,n):
             if dp[i][j] == float('inf'): 
                 continue
-            
+        
             for e in range(1, j+1): 
+                # e to kazdy mozliwy skok od 1 do j
                 if i + e >= n: continue
+                # obliczamy ile mamy teraz energii 
                 nowa_e = min(n-1, j-e+E[i+e])
+                # obliczamy dp czyli na nowym miejscu albo skok z porzedniego +1 jest mniejszy albo to miejsce ma juz mniejsze
                 dp[i+e][nowa_e] = min(dp[i+e][nowa_e], dp[i][j]+1)
-    
+
     
     if min(dp[n-1]) == float('inf'): return -1 
-    return min(dp[n-1])
+    return min(dp[n-1]) # zwracamy minimalny wynik z ostatniego pola
 
 # ==========================================
 # PROSTA TESTERKA

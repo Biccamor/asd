@@ -49,7 +49,7 @@ def longest(A,k):
         for i in range(n):
 
             if c == 1:
-                dp[c][i] = A[i][1]-A[i][0]+1 
+                dp[c][i] = max(dp[c][i-1], A[i][1]-A[i][0]+1) 
                 continue
 
             for j in range(i):
@@ -58,6 +58,31 @@ def longest(A,k):
                     dp[c][i]=max(dp[c][i], dp[c-1][j] + A[i][1]-A[i][0]) 
     ans = 0
     for i in range(n):
-        ans = max(ans, dp[k][i])
+        ans = min(ans, dp[k][i])
     return ans  
-        
+
+
+
+"""
+dp[k][n] - tablica kxn gdzie k to ilosc krokow zwracamy maksimum 
+idziemy pokolei dla kazdego mozliwej dlugosci odicnkow od 1 do k
+i dla kazdej przechodzimy 
+
+dp[1][i] = A[i][1]-A[i][0]+1 
+
+dp[k][i] = max(dp[k][i], dp[k-1][j] + A[i][1]-A[i][0])
+
+dla kazdego elementu przedzialu po prawej od aktualnego sprawdzamy czy da sie do niego dotrzec z obecnego
+jezeli tak to sprawdzamy z wozru rekurencyjnego czy oplaca sie z poprzednim krokiem
+
+
+(0,4) (4,7) (6, 10) (7, 12) (10, 14), (14, 19) (19, 21)
+
+
+k = 3 
+
+   1 2 3 4 5 6 7
+1: 4 3 4 5 4 5 2  
+2: 4 
+3:
+"""
