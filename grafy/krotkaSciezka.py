@@ -24,7 +24,7 @@ def solve(G,start,target):
     parent = bfs(G,start,target)
     if parent[target]==None and start!=target : 
         return []
-
+    
     path = [target]
     akt = target 
     while akt != start:

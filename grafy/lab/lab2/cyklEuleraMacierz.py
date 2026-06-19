@@ -5,27 +5,26 @@ stopnie parzyste).
 
 def solve(G, n): 
     
-    vis = [False]*n
-    
-    def dfs(u,G): 
-        vis[u] = True 
+    order = []
+    last = [0]*n
 
-        for v in range(n):
+    def dfs(u):
 
+        while last[u] < n:
+            v = last[u]
+            last[u]+=1  
+            
             if G[v][u] == 1:
                 G[v][u] = 0 
                 G[u][v] = 0                 
-                dfs(v,G)
-        return False 
-    akt = 0
-    for i in range(n): 
-        if vis[i] == False:
-            if akt>=1: return False  
-            akt+=1
-            if dfs(i,G) == True: 
-                return True
-            
+                dfs(v)
+        
+        order.append(u)
+    dfs(0)
 
+    order[::-1]
+            
+    return order 
 
 if __name__ == "__main__":
     G = [
@@ -36,4 +35,5 @@ if __name__ == "__main__":
         [1, 0, 1, 0, 0]
     ]
 
-
+    check = solve(G,len(G))
+    print(check)
